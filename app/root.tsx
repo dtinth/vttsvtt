@@ -5,24 +5,30 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
-import "./tailwind.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./index.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="en">
-      <head>
-        <meta charSet="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {children}
-        <ScrollRestoration />
-        <Scripts />
-      </body>
-    </html>
-  );
+  if (typeof window === "undefined") {
+    return (
+      <html lang="en" data-bs-theme="dark" className="dtinth">
+        <head>
+          <meta charSet="utf-8" />
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <title>VTT ↔ TSV</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          <div id="app">{children}</div>
+          <ScrollRestoration />
+          <Scripts />
+        </body>
+      </html>
+    );
+  } else {
+    return <>{children}</>;
+  }
 }
 
 export default function App() {
@@ -30,5 +36,14 @@ export default function App() {
 }
 
 export function HydrateFallback() {
-  return <p>Loading...</p>;
+  return (
+    <div className="d-flex justify-content-center align-items-center vh-100">
+      <div className="text-center">
+        <div className="spinner-border text-primary" role="status">
+          <span className="visually-hidden">Loading...</span>
+        </div>
+        <p className="mt-2">Loading...</p>
+      </div>
+    </div>
+  );
 }

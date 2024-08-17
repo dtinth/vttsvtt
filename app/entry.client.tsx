@@ -6,11 +6,10 @@
 
 import { RemixBrowser } from "@remix-run/react";
 import { startTransition, StrictMode } from "react";
-import { hydrateRoot } from "react-dom/client";
+import { createRoot } from "react-dom/client";
 
 startTransition(() => {
-  hydrateRoot(
-    document,
+  createRoot(document.getElementById("app")!).render(
     <StrictMode>
       <RemixBrowser />
     </StrictMode>

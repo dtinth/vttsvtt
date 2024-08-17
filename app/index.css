@@ -1,0 +1,22 @@
+@tailwind utilities;
+
+.dtinth {
+  --bs-gray-900: #252423;
+  --bs-gray-800: #353433;
+  --bs-gray-700: #454443;
+  --bs-gray-600: #656463;
+  --bs-gray-500: #8b8685;
+  --bs-gray-200: #e9e8e7;
+  --bs-gray-100: #f9f8f7;
+
+  --bs-body-bg: #353433;
+  --bs-body-bg-rgb: 53, 52, 51;
+
+  --bs-body-color: #e9e8e7;
+  --bs-body-color-rgb: 233, 232, 231;
+
+  --bs-link-color: #ffa;
+  --bs-link-color-rgb: 255, 255, 170;
+  --bs-link-hover-color: #ffc;
+  --bs-link-hover-color-rgb: 255, 255, 204;
+}
