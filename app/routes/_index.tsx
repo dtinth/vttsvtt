@@ -59,22 +59,24 @@ export default function Index() {
 function vttToTsv(vtt: string): string {
   const parsed = subtitle.parseSync(vtt);
   const cues = parsed.filter((x) => x.type === "cue").map((x) => x.data);
-  const lines: string[] = [];
+  const lines: string[][] = [];
   let lastEnd: number | undefined;
   for (const cue of cues) {
     const start = cue.start / 1000;
     const end = cue.end / 1000;
     const text = cue.text;
     if (lastEnd && start - lastEnd > 0.5) {
-      lines.push([lastEnd.toFixed(1), ""].join("\t"));
+      lines.push([lastEnd.toFixed(1), ""]);
     }
-    lines.push([start.toFixed(1), text].join("\t"));
+    lines.push([start.toFixed(1), text]);
     lastEnd = end;
   }
   if (lastEnd) {
-    lines.push([lastEnd.toFixed(1), ""].join("\t"));
+    lines.push([lastEnd.toFixed(1), ""]);
   }
-  return lines.join("\n");
+  return csv.stringify(lines, {
+    delimiter: "\t",
+  });
 }
 
 interface SubtitleEvent {
